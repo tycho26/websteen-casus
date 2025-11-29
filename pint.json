@@ -1,0 +1,7 @@
+{
+  "cache-file": ".pint.cache",
+  "preset": "laravel",
+  "rules": {
+    "ordered_traits": false
+  }
+}
