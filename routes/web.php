@@ -8,5 +8,4 @@ Route::get('/', function () {
 });
 
 
-Route::get('/project/create',[ProjectController::class,'create']);
-Route::post('/project/create',[ProjectController::class,'store']);
+Route::resource('/admin/project',ProjectController::class);

@@ -1,5 +1,8 @@
 <?php
 
+use Kris\LaravelFormBuilder\FormBuilderServiceProvider;
+use Kris\LaravelFormBuilder\Facades\FormBuilder;
+
 return [
 
     /*
@@ -123,4 +126,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'aliases' => [
+        'FormBuilder' => 'Kris\LaravelFormBuilder\Facades\FormBuilder'
+    ]
 ];

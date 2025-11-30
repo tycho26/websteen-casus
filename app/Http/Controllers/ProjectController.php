@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
+    use FormBuilderTrait;
     /**
      * Display a listing of the resource.
      */
@@ -18,9 +22,13 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(FormBuilder $formBuilder)
     {
-        return view('project.create');
+        $form = $formBuilder->create('App\Forms\ProjectForm', [
+            'url' => route('project.store'),
+            'method' => 'POST'
+        ]); 
+        return view('project.create', compact('form'));
     }
 
     /**
@@ -28,12 +36,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new Project;
-        $user->projectTitle = "test";
-        $user->projectDescription = "Lorem ofzo";
-        $user->projectSlug = "test";
 
-        $user->save();
+        $project = new Project;
+        $project->projectPublic = $request->projectPublic;
+        $project->projectTitle = $request->projectTitle;
+        $project->projectDescription = $request->projectDescription;
+        $project->projectSlug = Str::slug($request->projectTitle,"-");
+
+        $project->save();
+
+        return redirect(route('project.index'));
 
     }
 
