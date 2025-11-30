@@ -21,5 +21,5 @@ Plot{
     ENUM plotAreaStatus
 }
 
-Project || -- o{ Perceel:""
+Project || -- o{ Plot:""
 ```
