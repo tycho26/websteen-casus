@@ -2,6 +2,8 @@
 
 @section('content')
 
+<a class="btn btn-primary" href="{{route('project.create')}}">Nieuw project</a>
+
 <table class="table">
   <thead>
     <tr>
