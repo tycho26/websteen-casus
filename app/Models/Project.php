@@ -11,4 +11,15 @@ class Project extends Model
     use HasFactory;
 
     protected $guarded = ['projectID'];
+
+    protected $primaryKey = 'projectID';
+
+    public function isPublicString()
+    {
+        if ($this->projectPublic === 0) {
+            return 'Nee';
+        } else {
+            return 'Ja';
+        }
+    }
 }

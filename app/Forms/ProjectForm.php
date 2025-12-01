@@ -8,12 +8,12 @@ class ProjectForm extends Form
 {
     public function buildForm()
     {
-        $this->add('projectPublic', 'select',[
-            'choices' => [TRUE => 'Gepubliceerd', FALSE => 'Prive'],
-            'selected' => FALSE
+        $this->add('projectPublic', 'select', [
+            'choices' => [true => 'Gepubliceerd', false => 'Prive'],
+            'selected' => false,
         ])
-        ->add('projectTitle','text',['label'=>'Titel'])
-        ->add('projectDescription','textarea',['label'=>'Beschrijving'])
-        ->add('submit','submit',['label'=>'Aanmaken']);
+            ->add('projectTitle', 'text', ['label' => 'Titel'])
+            ->add('projectDescription', 'textarea', ['label' => 'Beschrijving'])
+            ->add('submit', 'submit', ['label' => 'Aanmaken']);
     }
 }

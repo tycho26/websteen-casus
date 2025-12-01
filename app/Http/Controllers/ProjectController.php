@@ -2,21 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
     use FormBuilderTrait;
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(bool $isAdmin = true)
     {
-        //
+        if ($isAdmin) {
+            $projects = Project::all();
+        } else {
+            $projects = Project::where('projectPublic', 1)->get();
+        }
+
+        return view('project.index', compact(['projects', 'isAdmin']));
     }
 
     /**
@@ -26,8 +33,9 @@ class ProjectController extends Controller
     {
         $form = $formBuilder->create('App\Forms\ProjectForm', [
             'url' => route('project.store'),
-            'method' => 'POST'
-        ]); 
+            'method' => 'POST',
+        ]);
+
         return view('project.create', compact('form'));
     }
 
@@ -41,7 +49,7 @@ class ProjectController extends Controller
         $project->projectPublic = $request->projectPublic;
         $project->projectTitle = $request->projectTitle;
         $project->projectDescription = $request->projectDescription;
-        $project->projectSlug = Str::slug($request->projectTitle,"-");
+        $project->projectSlug = Str::slug($request->projectTitle, '-');
 
         $project->save();
 
@@ -78,6 +86,8 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Project::destroy($id);
+
+        return redirect(route('project.index'));
     }
 }

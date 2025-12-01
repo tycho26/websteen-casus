@@ -15,8 +15,7 @@
                 <span class="fs-4">Websteen casus</span> 
             </a>
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/admin" class="nav-link">Admin paneel</a></li>
+                <li class="nav-item"><a href="{{route('project.index')}}" class="nav-link">Admin paneel</a></li>
             </ul>
         </header>
         @yield('content')

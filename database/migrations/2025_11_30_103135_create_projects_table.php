@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->increments("projectID");
-            $table->boolean('projectPublic')->default(FALSE);
-            $table->string('projectTitle',length:100);
+            $table->increments('projectID');
+            $table->boolean('projectPublic')->default(false);
+            $table->string('projectTitle', length: 100);
             $table->string('projectImage')->nullable();
             $table->longText('projectDescription');
             $table->string('projectSlug');

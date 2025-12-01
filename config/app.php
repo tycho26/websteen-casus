@@ -1,8 +1,5 @@
 <?php
 
-use Kris\LaravelFormBuilder\FormBuilderServiceProvider;
-use Kris\LaravelFormBuilder\Facades\FormBuilder;
-
 return [
 
     /*
@@ -127,6 +124,6 @@ return [
     ],
 
     'aliases' => [
-        'FormBuilder' => 'Kris\LaravelFormBuilder\Facades\FormBuilder'
-    ]
+        'FormBuilder' => 'Kris\LaravelFormBuilder\Facades\FormBuilder',
+    ],
 ];
