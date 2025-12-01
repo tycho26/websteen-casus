@@ -19,11 +19,15 @@
       <td>{{$project->isPublicString()}}</td>
       @if ($isAdmin)
         <td>
+          <div class="btn-group" role="group">
+            <a class="btn btn-primary" href="{{route('project.edit',['project'=>$project->projectID])}}">Bewerken</a>
             <form method='POST' action="{{route('project.destroy',['project'=>$project->projectID])}}">
                 @method('DELETE')
                 @csrf
-                <button class="btn btn-danger" type="submit">Verwijder</button></td>
+              <button class="btn btn-danger" type="submit">Verwijder</button>
             </form>
+          </div>
+      </td>
       @endif
     </tr>
     @endforeach

@@ -68,9 +68,18 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, FormBuilder $formBuilder)
     {
-        //
+        $project = Project::findOrFail($id);
+        
+        $form = $formBuilder->create('App\Forms\ProjectForm', [
+            'url' => route('project.update',['project'=>$id]),
+            'method' => 'PUT',
+            'model' => $project
+        ]);
+
+        return view('project.create', compact('form'));
+
     }
 
     /**
@@ -78,8 +87,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $project = Project::findOrFail($id);
+        // dd($request->input());
+        $project->update($request->input());
+        return redirect(route('project.index'));
+    }   
 
     /**
      * Remove the specified resource from storage.
