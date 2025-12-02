@@ -2,7 +2,9 @@
 
 @section('content')
 
-<a class="btn btn-primary" href="{{route('project.create')}}">Nieuw project</a>
+@if ($isAdmin)
+    <a class="btn btn-primary" href="{{route('project.create')}}">Nieuw project</a>
+@endif
 
 <table class="table">
   <thead>

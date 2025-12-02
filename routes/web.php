@@ -13,4 +13,11 @@ Route::get('/', function () {
     return $projectController->index($isAdmin = false);
 });
 
+Route::get('/project/{project}', function () {
+    $projectController = new ProjectController;
+
+    return $projectController->index($isAdmin = false);
+});
+
+
 Route::resource('/admin/project', ProjectController::class);
