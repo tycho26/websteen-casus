@@ -14,6 +14,11 @@ class Project extends Model
 
     protected $primaryKey = 'projectID';
 
+    public function getRouteKeyName(): string
+    {
+        return 'projectSlug';
+    }
+
     public function isPublicString()
     {
         if ($this->projectPublic === 0) {

@@ -17,13 +17,13 @@
     @foreach ($projects as $project)
     <tr>
       <td>{{$project->projectID}}</td>
-      <td>{{$project->projectTitle}}</td>
+      <td><a href="{{route('project.show',['project'=>$project])}}">{{$project->projectTitle}}</a></td>
       <td>{{$project->isPublicString()}}</td>
       @if ($isAdmin)
         <td>
           <div class="btn-group" role="group">
-            <a class="btn btn-primary" href="{{route('project.edit',['project'=>$project->projectID])}}">Bewerken</a>
-            <form method='POST' action="{{route('project.destroy',['project'=>$project->projectID])}}">
+            <a class="btn btn-primary" href="{{route('project.edit',['project'=>$project])}}">Bewerken</a>
+            <form method='POST' action="{{route('project.destroy',['project'=>$project])}}">
                 @method('DELETE')
                 @csrf
               <button class="btn btn-danger" type="submit">Verwijder</button>
