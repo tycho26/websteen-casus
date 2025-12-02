@@ -60,7 +60,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
         //
     }
@@ -68,12 +68,12 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id, FormBuilder $formBuilder)
+    public function edit(Project $project, FormBuilder $formBuilder)
     {
-        $project = Project::findOrFail($id);
+        // $project = Project::findOrFail($id);
         
         $form = $formBuilder->create('App\Forms\ProjectForm', [
-            'url' => route('project.update',['project'=>$id]),
+            'url' => route('project.update',['project'=>$project]),
             'method' => 'PUT',
             'model' => $project
         ]);
@@ -85,20 +85,26 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        $project = Project::findOrFail($id);
+        // $project = Project::findOrFail($id);
         // dd($request->input());
-        $project->update($request->input());
+        $project->fill($request->input());
+        // dd($project);
+        if($project->isDirty("projectTitle"))
+        {
+            $project->projectSlug = Str::slug($request->projectTitle, '-');
+        }
+        $project->save();
         return redirect(route('project.index'));
     }   
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        Project::destroy($id);
+        $project->delete();
 
         return redirect(route('project.index'));
     }
