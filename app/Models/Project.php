@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Plot;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends Model
 {
@@ -26,5 +28,10 @@ class Project extends Model
         } else {
             return 'Ja';
         }
+    }
+
+    public function plots(): HasMany
+    {
+        return $this->hasMany(Plot::class);
     }
 }

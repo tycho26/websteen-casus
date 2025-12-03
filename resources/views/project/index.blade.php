@@ -19,7 +19,11 @@
     @foreach ($projects as $project)
     <tr>
       <td>{{$project->projectID}}</td>
-      <td><a href="{{route('project.show',['project'=>$project])}}">{{$project->projectTitle}}</a></td>
+      @if ($isAdmin)
+        <td><a href="{{route('project.show',['project'=>$project])}}">{{$project->projectTitle}}</a></td>
+      @else
+        <td><a href="{{route('project.showUser',['project'=>$project])}}">{{$project->projectTitle}}</a></td>
+      @endif
       <td>{{$project->isPublicString()}}</td>
       @if ($isAdmin)
         <td>

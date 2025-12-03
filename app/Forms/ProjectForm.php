@@ -14,6 +14,7 @@ class ProjectForm extends Form
         ])
             ->add('projectTitle', 'text', ['label' => 'Titel'])
             ->add('projectDescription', 'textarea', ['label' => 'Beschrijving'])
+            ->add('projectImage', 'file', ['label' => 'Afbeelding'])
             ->add('submit', 'submit', ['label' => 'Opslaan']);
     }
 }

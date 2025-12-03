@@ -50,6 +50,9 @@ class ProjectController extends Controller
         $project->projectTitle = $request->projectTitle;
         $project->projectDescription = $request->projectDescription;
         $project->projectSlug = Str::slug($request->projectTitle, '-');
+        if($request->hasFile('projectImage')){
+         $project->projectImage = $request->projectImage->store('images');
+        }
 
         $project->save();
 
@@ -60,10 +63,10 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(Project $project, bool $isAdmin = true)
     {
         // $project = Project::findOrFail($id);
-        return view("project.show",compact('project'));
+        return view("project.show",compact(['project','isAdmin']));
     }
 
     /**
@@ -95,6 +98,9 @@ class ProjectController extends Controller
         if($project->isDirty("projectTitle"))
         {
             $project->projectSlug = Str::slug($request->projectTitle, '-');
+        }
+        if($request->hasFile('projectImage')){
+         $project->projectImage = $request->projectImage->store('images');
         }
         $project->save();
         return redirect(route('project.index'));

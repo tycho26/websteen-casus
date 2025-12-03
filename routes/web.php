@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Project;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\PlotController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -13,11 +15,13 @@ Route::get('/', function () {
     return $projectController->index($isAdmin = false);
 });
 
-Route::get('/project/{project}', function () {
+Route::get('/project/{project}', function (Project $project) {
     $projectController = new ProjectController;
 
-    return $projectController->index($isAdmin = false);
+    return $projectController->show($project, $isAdmin = false);
+})->name('project.showUser');
+
+Route::prefix('admin')->group(function() {
+    Route::resource('/project', ProjectController::class);
+    Route::resource('project.plot', PlotController::class)->except(['show','index']);
 });
-
-
-Route::resource('/admin/project', ProjectController::class);
