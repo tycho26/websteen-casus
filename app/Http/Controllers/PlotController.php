@@ -13,13 +13,6 @@ use App\Jobs\GetPlotArea;
 class PlotController extends Controller
 {
     use FormBuilderTrait;
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -41,18 +34,9 @@ class PlotController extends Controller
         $plot = new Plot();
         $plot->fill($request->input());
         $project->plots()->save($plot);
-        // dd($plot);
         
         GetPlotArea::dispatch($plot);
         return redirect(route('project.show',$project));
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Plot $plot)
-    {
-        //
     }
 
     /**

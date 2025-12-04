@@ -66,7 +66,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project, bool $isAdmin = true)
     {
-        // $project = Project::findOrFail($id);
         $imgUrl = Storage::url($project->projectImage);
         return view("project.show",compact(['project','isAdmin', 'imgUrl']));
     }
@@ -75,9 +74,7 @@ class ProjectController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Project $project, FormBuilder $formBuilder)
-    {
-        // $project = Project::findOrFail($id);
-        
+    {        
         $form = $formBuilder->create('App\Forms\ProjectForm', [
             'url' => route('project.update',['project'=>$project]),
             'method' => 'PUT',
@@ -93,10 +90,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        // $project = Project::findOrFail($id);
-        // dd($request->input());
         $project->fill($request->input());
-        // dd($project);
         if($project->isDirty("projectTitle"))
         {
             $project->projectSlug = Str::slug($request->projectTitle, '-');

@@ -37,10 +37,8 @@ class GetPlotArea implements ShouldQueue
         ])->get('{+endpoint}?service={service}&request={request}&version={version}&srsName={srsName}&typenames={typenames}&outputFormat={outputFormat}&filter={filter}');
         if($response->ok()){
             $this->plot->plotArea = $response['features'][0]['properties']['kadastraleGrootteWaarde'];
-            // $response
         }
 
-        // $this->plot->plotTitle = "job";
         $this->plot->save();
     }
 }
