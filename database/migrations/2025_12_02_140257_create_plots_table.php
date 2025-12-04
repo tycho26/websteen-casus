@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("plotSection");
             $table->integer("plotNum");
             $table->integer("plotArea")->default(0);
-            $table->enum('areaTaskStatus',["not_requested","pending","in_progress","completed","failed"]);
+            $table->enum('areaTaskStatus',["not_requested","pending","in_progress","completed","failed"])->default('not_requested');
             $table->timestamps();
         });
     }
