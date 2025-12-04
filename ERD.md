@@ -3,9 +3,9 @@ erDiagram
 
 Project{
     INT projectID PK
-    BOOL public
-    VARCHAR(255) projectTitle
-    VARCHAR projectImagePath
+    BOOL projectPublic
+    VARCHAR(100) projectTitle
+    VARCHAR projectImage
     VARCHAR(500) projectDescription
     VARCHAR(255) projectSlug 
 }
@@ -21,5 +21,5 @@ Plot{
     ENUM plotAreaStatus
 }
 
-Project || -- o{ Perceel:""
+Project || -- o{ Plot:""
 ```
