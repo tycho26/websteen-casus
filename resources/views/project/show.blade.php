@@ -12,6 +12,11 @@
             <span class="d-inline-flex"><p class="fw-bold">Beschrijving:</p><p>{{$project->projectDescription}}</p></span>
     </div>
 </div>
+<div class="row">
+    <div class="col">
+        <img src="{{$imgUrl}}" class="img-fluid" alt="...">
+    </div>
+</div>
     <div class="row">
         <div class="col-2">
             <h2 class="h2">Percelen</h2>
@@ -44,7 +49,20 @@
       <td>{{$plot->plotSection}}</td>
       <td>{{$plot->plotNum}}</td>
       <td>{{$plot->plotArea}}</td>
-      <td>N/A</td>
+      <td>
+        @if ($isAdmin)
+        <td>
+          <div class="btn-group" role="group">
+            <a class="btn btn-primary" href="{{route('project.plot.edit',['project'=>$project, 'plot'=>$plot])}}">Bewerken</a>
+            <form method='POST' action="{{route('project.plot.destroy',['project'=>$project, 'plot'=>$plot])}}">
+                @method('DELETE')
+                @csrf
+              <button class="btn btn-danger" type="submit">Verwijder</button>
+            </form>
+          </div>
+      </td>
+      @endif
+      </td>
     </tr>
     @endforeach
   </tbody>

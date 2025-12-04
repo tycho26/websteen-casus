@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -66,7 +67,8 @@ class ProjectController extends Controller
     public function show(Project $project, bool $isAdmin = true)
     {
         // $project = Project::findOrFail($id);
-        return view("project.show",compact(['project','isAdmin']));
+        $imgUrl = Storage::url($project->projectImage);
+        return view("project.show",compact(['project','isAdmin', 'imgUrl']));
     }
 
     /**

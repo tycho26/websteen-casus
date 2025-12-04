@@ -58,24 +58,38 @@ class PlotController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Plot $plot)
+    public function edit(Project $project, Plot $plot, FormBuilder $formBuilder)
     {
-        //
+        $form = $formBuilder->create('App\Forms\PlotForm', [
+            'url' => route('project.plot.update',['project'=>$project, 'plot'=>$plot]),
+            'method' => 'PUT',
+            'model' => $plot
+        ]);
+
+        return view('project.create', compact('form'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Plot $plot)
+    public function update(Request $request, Project $project, Plot $plot)
     {
-        //
+        // $project = Project::findOrFail($id);
+        // dd($request->input());
+        $plot->fill($request->input());
+        // dd($project);
+        $plot->save();
+        GetPlotArea::dispatch($plot);
+        return redirect(route('project.show',$project));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Plot $plot)
+    public function destroy(Project $project, Plot $plot)
     {
-        //
+        $plot->delete();
+
+        return redirect(route('project.show',$project));
     }
 }

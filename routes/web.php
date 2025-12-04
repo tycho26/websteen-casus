@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Project;
+use App\Models\Plot;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PlotController;
 use Illuminate\Support\Facades\Route;
