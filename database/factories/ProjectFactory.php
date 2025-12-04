@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
@@ -16,8 +17,12 @@ class ProjectFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->company();
         return [
-            //
+            'projectTitle'=>$name,
+            'projectPublic'=>0,
+            'projectDescription'=>fake()->realText($maxNbChars=450),
+            'projectSlug'=>Str::slug($name)
         ];
     }
 }

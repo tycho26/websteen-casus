@@ -31,6 +31,13 @@ class PlotController extends Controller
      */
     public function store(Project $project, Request $request)
     {
+        $validated = $request->validate([
+            'plotTitle'=>'required',
+            'plotMunicipality'=>'required',
+            'plotSection'=>'required',
+            'plotNum'=>'required|integer',
+        ]);
+
         $plot = new Plot();
         $plot->fill($request->input());
         $project->plots()->save($plot);
@@ -58,10 +65,13 @@ class PlotController extends Controller
      */
     public function update(Request $request, Project $project, Plot $plot)
     {
-        // $project = Project::findOrFail($id);
-        // dd($request->input());
+        $validated = $request->validate([
+            'plotTitle'=>'required',
+            'plotMunicipality'=>'required',
+            'plotSection'=>'required',
+            'plotNum'=>'required|integer',
+        ]);
         $plot->fill($request->input());
-        // dd($project);
         $plot->save();
         GetPlotArea::dispatch($plot);
         return redirect(route('project.show',$project));

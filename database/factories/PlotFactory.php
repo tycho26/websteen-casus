@@ -17,7 +17,10 @@ class PlotFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'plotTitle'=>fake()->name(),
+            'plotMunicipality'=>fake()->city(),
+            'plotSection'=>'C',
+            'plotNum'=>rand(2000,2999)
         ];
     }
 }

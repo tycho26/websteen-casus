@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\FormBuilder;
+use App\Forms\ProjectForm;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,6 +47,11 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
 
+        $validated = $request->validate([
+            'projectTitle'=>'required|max:255',
+            'projectDescription'=>'required|max:500'
+        ]);
+
         $project = new Project;
         $project->projectPublic = $request->projectPublic;
         $project->projectTitle = $request->projectTitle;
@@ -74,7 +80,7 @@ class ProjectController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Project $project, FormBuilder $formBuilder)
-    {        
+    {      
         $form = $formBuilder->create('App\Forms\ProjectForm', [
             'url' => route('project.update',['project'=>$project]),
             'method' => 'PUT',
@@ -90,6 +96,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        $validated = $request->validate([
+            'projectTitle'=>'required|max:255',
+            'projectDescription'=>'required|max:500'
+        ]);
+
         $project->fill($request->input());
         if($project->isDirty("projectTitle"))
         {

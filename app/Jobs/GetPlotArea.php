@@ -38,6 +38,9 @@ class GetPlotArea implements ShouldQueue
         if($response->ok()){
             $this->plot->plotArea = $response['features'][0]['properties']['kadastraleGrootteWaarde'];
         }
+        else{
+            $this->release();
+        }
 
         $this->plot->save();
     }
